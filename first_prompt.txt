@@ -1,0 +1,25 @@
+You are expirienced Python developer.
+
+We need to create a project from zero, i think the stack will be Python with Telethon, but for command /health (idk what is the best approach, that we can write /health to a user who will get statistics and send later it in to provided group_id or lets it will be a bot (with itself api token from botfather, what you think will be more accurate solution, give me info of both and i decide what we do best for /health to work))
+
+Technical Specification / Business Requirements:
+i have three bots (there can be many bots, lets i be able to provide @username_bot for each)
+
+Every 30 min, I want to see statistic - is listed bots are running or not:
+"
+BOT - STATUS
+BOT1 - 🟢 (when online, without text just use emoji)
+BOT2 - 🔴 (when offline)
+"
+
+Each 12 hours (at 4 AM and 18 PM by GMT):
+I want to see a statistics message with info what average response time was:
+"
+BOT - время ответа в сек. (мин, ср, макс)
+BOT1 - 0.5, 1, 5 (и если бот не отвечал хоть на 1 из запросов показать это здесь, на сколько пингов за 12ч он не ответил (1 пинг раз в 30 мин))
+BOT2 - 0, 0, 0
+"
+
+and also i want to be able to run /health by a command to get info are currently bots active or not.
+
+How I'm already research, we need to use a real account and Telethon, provide me with .env file where i need to put all necessary info for account (to be used for account that will sends /start to bot via Telethon)
