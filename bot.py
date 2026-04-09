@@ -57,23 +57,26 @@ class HealthBot:
 
     @staticmethod
     def _format_status(results: dict[str, PingResult]) -> str:
-        lines = ["BOT — STATUS"]
+        lines = ["BOT — STATUS — время ответа, сек"]
         for bot_username, result in results.items():
             name = bot_username.lstrip("@")
             status = "🟢" if result.success else "🔴"
-            lines.append(f"{name} — {status}")
+            rt = f"{result.response_time}" if result.response_time is not None else "—"
+            lines.append(f"{name} — {status} — {rt}")
         return "\n".join(lines)
 
     def _format_cached_status(self) -> str:
-        lines = ["BOT — STATUS"]
+        lines = ["BOT — STATUS — время ответа, сек"]
         for bot_username in MONITORED_BOTS:
             name = bot_username.lstrip("@")
             result = self.storage.get_latest(bot_username)
             if result is None:
                 status = "⚪"  # never checked yet
+                rt = "—"
             else:
                 status = "🟢" if result.success else "🔴"
-            lines.append(f"{name} — {status}")
+                rt = f"{result.response_time}" if result.response_time is not None else "—"
+            lines.append(f"{name} — {status} — {rt}")
         return "\n".join(lines)
 
     def _build_detailed_report(self) -> str:
