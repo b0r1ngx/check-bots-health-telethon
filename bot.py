@@ -7,6 +7,8 @@ from typing import TYPE_CHECKING
 
 from telethon import TelegramClient, events
 
+import socks
+
 from config import (
     API_ID,
     API_HASH,
@@ -15,6 +17,8 @@ from config import (
     ADMIN_IDS,
     MONITORED_BOTS,
     SESSIONS_DIR,
+    PROXY_HOST,
+    PROXY_PORT,
 )
 from storage import PingResult, Storage
 
@@ -29,7 +33,8 @@ class HealthBot:
 
     def __init__(self, storage: Storage) -> None:
         self.client = TelegramClient(
-            os.path.join(SESSIONS_DIR, "bot"), API_ID, API_HASH
+            os.path.join(SESSIONS_DIR, "bot"), API_ID, API_HASH,
+            proxy=(socks.SOCKS5, PROXY_HOST, PROXY_PORT, True),
         )
         self.storage = storage
         self.checker: HealthChecker | None = None  # injected after init

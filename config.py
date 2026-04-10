@@ -33,5 +33,8 @@ REPORT_HOURS: list[int] = [
     int(h.strip()) for h in os.getenv("REPORT_HOURS", "4,18").split(",") if h.strip()
 ]
 
+PROXY_HOST = os.getenv("PROXY_HOST", "127.0.0.1")
+PROXY_PORT = int(os.getenv("PROXY_PORT", "20170"))
+
 SESSIONS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "sessions")
 os.makedirs(SESSIONS_DIR, exist_ok=True)

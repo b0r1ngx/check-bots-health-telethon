@@ -5,9 +5,10 @@ import time
 from datetime import datetime, timezone
 from typing import Optional
 
+import socks
 from telethon import TelegramClient, events
 
-from config import API_ID, API_HASH, PHONE, PING_TIMEOUT, MONITORED_BOTS, SESSIONS_DIR
+from config import API_ID, API_HASH, PHONE, PING_TIMEOUT, MONITORED_BOTS, SESSIONS_DIR, PROXY_HOST, PROXY_PORT
 from storage import PingResult, Storage
 
 logger = logging.getLogger(__name__)
@@ -18,7 +19,8 @@ class HealthChecker:
 
     def __init__(self, storage: Storage) -> None:
         self.client = TelegramClient(
-            os.path.join(SESSIONS_DIR, "user"), API_ID, API_HASH
+            os.path.join(SESSIONS_DIR, "user"), API_ID, API_HASH,
+            proxy=(socks.SOCKS5, PROXY_HOST, PROXY_PORT, True),
         )
         self.storage = storage
         self._pending: dict[str, asyncio.Event] = {}
