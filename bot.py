@@ -34,7 +34,7 @@ class HealthBot:
     def __init__(self, storage: Storage) -> None:
         self.client = TelegramClient(
             os.path.join(SESSIONS_DIR, "bot"), API_ID, API_HASH,
-            proxy=(socks.SOCKS5, PROXY_HOST, PROXY_PORT, True),
+            # proxy=(socks.SOCKS5, PROXY_HOST, PROXY_PORT, True),
         )
         self.storage = storage
         self.checker: HealthChecker | None = None  # injected after init

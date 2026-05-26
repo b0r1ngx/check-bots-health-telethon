@@ -20,7 +20,7 @@ class HealthChecker:
     def __init__(self, storage: Storage) -> None:
         self.client = TelegramClient(
             os.path.join(SESSIONS_DIR, "user"), API_ID, API_HASH,
-            proxy=(socks.SOCKS5, PROXY_HOST, PROXY_PORT, True),
+            # proxy=(socks.SOCKS5, PROXY_HOST, PROXY_PORT, True),
         )
         self.storage = storage
         self._pending: dict[str, asyncio.Event] = {}
